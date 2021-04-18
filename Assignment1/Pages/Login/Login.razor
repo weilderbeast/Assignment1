@@ -1,0 +1,72 @@
+@page "/Login"
+@using Assignment1.Data.Login
+
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@inject NavigationManager NavigationManager;
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="main">
+            <div class="login">
+                <div class="title">
+                    <img src="../../icons/linux.svg" width="64" height="64">
+                    Assignment 1
+                </div>
+                <div class="login-form">
+                    <form>
+                        <input type="text" placeholder="username" @bind-value="_username">
+                        <input type="text" placeholder="password" @bind-value="_password">
+                        <button type="submit" class="login-button" @onclick="LoginTask">Log in</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </NotAuthorized>
+    <Authorized>
+        @if (true)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    </Authorized>
+</AuthorizeView>
+
+
+@code{
+
+    private string _username;
+    private string _password;
+    private string _errorMessage;
+
+    private async Task LoginTask()
+    {
+        _errorMessage = "";
+        try
+        {
+            await ((CustomAuthProvider) AuthenticationStateProvider).ValidateLogin(_username, _password);
+            _username = "";
+            _password = "";
+        }
+        catch (Exception e)
+        {
+            _errorMessage = e.Message;
+        }
+    }
+
+    public async Task Logout()
+    {
+        _errorMessage = "";
+        _username = "";
+        _password = "";
+        try
+        {
+            ((CustomAuthProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            System.Console.WriteLine(e);
+        }
+    }
+
+}

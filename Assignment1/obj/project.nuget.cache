@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Z6ngwgl+iH6vfuG52YVTY+23ooXgihwWiV8pNIym54VUSg2VZXWixABquAOaLBEbsQNArrBhO1kbUNUy9vGp9A==",
+  "success": true,
+  "projectFilePath": "D:\\University\\RiderProjects\\Assignment1\\Assignment1\\Assignment1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cirst\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\5.0.4\\microsoft.aspnetcore.authentication.google.5.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

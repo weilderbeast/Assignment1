@@ -1,0 +1,58 @@
+@using Assignment1.Data.Models
+@using Assignment1.Data.Persistence
+
+@inject FileContextAsync FileContextAsync;
+
+@attribute [Authorize]
+
+<div class="family-main" id="list">
+    <div class="family-search">
+        <div class="family-title">
+            Families
+            <a href="/adults">
+                <img alt="asd" src="/icons/plus.svg">
+            </a>
+        </div>
+        <input class="input-field" type="text" placeholder="Search..." @oninput="@(Filter)">
+    </div>
+
+    <div class="family-container">
+        @foreach (var family in _filteredFamilies)
+        {
+            <FamilyListing Family=@family/>
+        }
+    </div>
+</div>
+
+@code{
+    private IList<Family> _families = new List<Family>();
+    private IList<Family> _filteredFamilies = new List<Family>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _families = await FileContextAsync.GetFamiliesAsync();
+        Filter(new ChangeEventArgs());
+    }
+    
+    private void Filter(ChangeEventArgs args)
+    {
+        string filterByName = null;
+        try
+        {
+            filterByName = args.Value?.ToString();
+        }
+        catch (Exception e)
+        {
+            System.Console.WriteLine(e);
+        }
+        if (filterByName != null && !filterByName.Equals(""))
+        {
+            _filteredFamilies = _families.Where(t => t.Adults[0].LastName.Contains(filterByName)).ToList();
+        }
+        else
+        {
+            _filteredFamilies = _families;
+        }
+    }
+
+}

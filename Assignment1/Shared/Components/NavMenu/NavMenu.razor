@@ -1,0 +1,54 @@
+@inject NavigationManager NavManager
+
+<AuthorizeView>
+    <Authorized>
+        <div>
+            <div class="nav">
+                <ul class="nav-ul" style="padding:0;">
+                    <li class="nav-item">
+                        <div class="item-content">
+                            <a href="/">
+                                Home
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="item-content">
+                            <a href="/adults">
+                                Adults
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="item-content">
+                            <a href="/children">
+                                Children
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="item-content">
+                            <a href="/pets">
+                                Pets
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="profile">
+                <a href="/profile">
+                    <img alt="profile" src="../icons/profile.svg" width="32" height="32">
+                </a>
+
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div></div>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code{
+
+}
